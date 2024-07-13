@@ -13,8 +13,8 @@ export default async function Navbar() {
   return (
     <nav className="fixed w-full z-10 shadow-sm bg-[#333333] h-12 lg:h-16">
       <Container className="max-w-[1600px] h-full flex flex-row items-center justify-between">
-        <Menu />
-        <Logo height={150} width={150}/>
+        <Menu user={user}/>
+        <Logo height={145} width={145}/>
         <Links />
         <ProfileMenu user={user}/>
       </Container>

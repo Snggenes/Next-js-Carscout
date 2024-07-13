@@ -2,8 +2,9 @@
 import Link from "next/link";
 
 export default function Links() {
+
   return (
-    <div className="hidden lg:flex flex-row gap-4">
+    <div className="hidden lg:flex flex-row gap-2 items-center">
       <Link
         href="/"
         className="hover:bg-white hover:text-black transition py-3 px-4 rounded-sm"
@@ -17,7 +18,7 @@ export default function Links() {
         Verkopen
       </Link>
       <Link
-        href="/car-news"
+        href="/magazine"
         className="hover:bg-white hover:text-black transition py-3 px-4 rounded-sm"
       >
         Magazine

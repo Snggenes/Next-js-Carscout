@@ -5,25 +5,26 @@ import { signOut } from "next-auth/react";
 
 import { FaStar, FaBell } from "react-icons/fa";
 import ProfileMenuItem from "./profile-menu-item";
-
-import LoginModal from "../modals/login-modal";
+import useLoginModal from "../modals/use-login-modal";
 
 export default function ProfileMenu({ user }: { user: User | undefined }) {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = useCallback(() => setIsOpen((prev) => !prev), []);
 
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
+    const loginModal = useLoginModal();
   return (
-    <div className="flex flex-row gap-3 relative">
-      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
+    <div className="flex flex-row gap-3 relative items-center">
       <FaStar className="h-[23px] w-[23px] cursor-pointer" />
       <FaBell className="h-[23px] w-[23px] cursor-pointer" />
       <div className="hidden lg:block cursor-pointer" onClick={handleOpen}>
         {user ? (
           <div>Mijn Autoscout24</div>
         ) : (
-          <div onClick={() => setIsLoginModalOpen((prev) => !prev)}>Login</div>
+          <div className="hover:bg-white hover:text-black transition py-2 px-4 rounded-sm border-white border-2"
+            onClick={() => loginModal.open()}
+          >
+            Inloggen
+          </div>
         )}
       </div>
       {isOpen && user && (

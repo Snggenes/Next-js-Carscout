@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/navbar";
+import LoginModal from "./components/modals/login-modal";
+import WelcomeModal from "./components/modals/welcome-modal";
+import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+      <ToastContainer position="top-left" autoClose={2500} hideProgressBar />
         <Navbar />
+        <LoginModal />
+        <WelcomeModal />
         <div className="h-full pt-12 lg:pt-16">{children}</div>
       </body>
     </html>

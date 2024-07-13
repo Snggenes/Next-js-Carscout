@@ -1,6 +1,5 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -10,22 +9,20 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 
-type TLoginModalProps = {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
+import useLoginModal from "./use-login-modal";
 
-export default function LoginModal({ isOpen, setIsOpen }: TLoginModalProps) {
-  if (!isOpen) {
-    return null;
-  }
+export default function LoginModal() {
+
+  const loginModal = useLoginModal();
+
+  if (!loginModal.isOpen) return null;
 
   return (
     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-slate-800/20">
       <div className="bg-white h-full w-full md:h-[610px] md:w-[377px] rounded-md relative">
         <IoMdClose
           className="absolute text-black top-6 right-6 w-8 h-8 cursor-pointer"
-          onClick={() => setIsOpen(false)}
+          onClick={() => loginModal.close()}
         />
         <div className="flex flex-col gap-4 w-full items-center text-black">
           <Image
@@ -41,34 +38,37 @@ export default function LoginModal({ isOpen, setIsOpen }: TLoginModalProps) {
             </p>
           </div>
           <div className="px-4 w-full">
-            <Button variant="custom" className="text-sm">
+            <Button variant="custom" className="text-sm border-2">
               Ga verder als autobedrijf?
             </Button>
           </div>
           <div className="w-full flex flex-col px-4 gap-1 border py-2">
             <label>E-mailadres</label>
-            <Button variant="custom" className="border text-gray-400/80 mb-2">
+            <Button
+              variant="custom"
+              className="border text-gray-400/80 mb-2 border-gray-300 focus:border-black focus:border-2"
+            >
               Bijv. jan@example.com
             </Button>
             <Button
               variant="custom"
-              className="border bg-yellow-300 hover:bg-yellow-200 transition"
+              className="border bg-yellow-300 hover:bg-yellow-200 transition border-none"
             >
               Ga verder met email
             </Button>
             <p className="w-full p-4 flex items-center justify-center">-of-</p>
             <Button
               variant="custom"
-              className="text-sm gap-4 mb-2"
+              className="text-sm gap-4 mb-2 border-2"
               onClick={() => signIn("google")}
             >
               <FaGoogle /> Ga verder met Google
             </Button>
-            <Button variant="custom" className="text-sm gap-4 mb-2">
+            <Button variant="custom" className="text-sm gap-4 mb-2 border-2">
               <FaFacebookF />
               Ga verder met Facebook
             </Button>
-            <Button variant="custom" className="text-sm gap-4">
+            <Button variant="custom" className="text-sm gap-4 border-2">
               <FaApple />
               Ga verder met Apple
             </Button>
