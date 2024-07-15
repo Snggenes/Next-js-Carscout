@@ -11,7 +11,7 @@ export default async function Navbar() {
   const user = session?.user;
 
   return (
-    <nav className="fixed w-full z-10 shadow-sm bg-[#333333] h-12 lg:h-16">
+    <nav className="fixed w-full z-20 shadow-sm bg-[#333333] h-12 lg:h-16">
       <Container className="max-w-[1600px] h-full flex flex-row items-center justify-between">
         <Menu user={user}/>
         <Logo height={145} width={145}/>

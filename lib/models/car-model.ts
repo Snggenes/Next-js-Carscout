@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 export type TCar = {
+  _id?: string;
   brand: string;
   model: string;
   price: number;
@@ -9,6 +10,8 @@ export type TCar = {
   fuel: string;
   transmission: string;
   body: string;
+  images: string[];
+  createdAt: Date;
 };
 
 const CarSchema = new Schema<TCar>({
@@ -20,6 +23,8 @@ const CarSchema = new Schema<TCar>({
   fuel: { type: String, required: true },
   transmission: { type: String, required: true },
   body: { type: String, required: true },
+  images: { type: [String], required: true, default: [] },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const CarModel = mongoose.models.Car || mongoose.model("Car", CarSchema);

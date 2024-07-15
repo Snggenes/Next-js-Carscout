@@ -2,7 +2,7 @@ import SearchForm from "./search-form";
 import CarModel from "@/lib/models/car-model";
 import dbConnect from "@/lib/dbConnect";
 
-export default async function Seearch({ params, searchParams }: any) {
+export default async function Seearch({ params, searchParams, className }: any) {
   await dbConnect();
 
   const { brand, model, price, year } = searchParams;
@@ -65,10 +65,12 @@ export default async function Seearch({ params, searchParams }: any) {
   return (
     <div className="h-full w-full">
       <SearchForm
-        className="grid-cols-3"
+        className={className}
         count={count}
         brands={brands}
         models={models}
+        params={params}
+        searchParams={searchParams}
       />
     </div>
   );

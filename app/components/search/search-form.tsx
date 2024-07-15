@@ -24,6 +24,8 @@ type SearchFormProps = {
   count: number;
   brands: string[];
   models: string[];
+  params: any;
+  searchParams: any;
 };
 
 export default function SearchForm({
@@ -31,11 +33,19 @@ export default function SearchForm({
   count,
   brands,
   models,
+  params,
+  searchParams,
 }: SearchFormProps) {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof MainPageSearchSchema>>({
     resolver: zodResolver(MainPageSearchSchema),
+    defaultValues: {
+      brand: searchParams.brand || undefined,
+      model: searchParams.model || undefined,
+      year: searchParams.year || undefined,
+      price: searchParams.price || undefined,
+    },
   });
 
   function onSubmit(data: z.infer<typeof MainPageSearchSchema>) {
@@ -85,21 +95,25 @@ export default function SearchForm({
             defaultValues={years}
             placeholder="Bouwjaar vanaf"
           />
-          <FormInput
-            control={form.control}
-            name="address"
-            placeholder="Plaats of postcode"
-            type="text"
-          />
-          <Button
-            variant="menu"
-            className="bg-yellow-300 flex items-center justify-center"
-            type="submit"
-          >
-            {count} resultaten
-          </Button>
-          <p></p>
-          <div className="w-full text-center text-sm text-blue-700 cursor-pointer">
+          <div className=" col-span-2 w-full md:col-span-1">
+            <FormInput
+              control={form.control}
+              name="address"
+              placeholder="Plaats of postcode"
+              type="text"
+            />
+          </div>
+          <div className=" col-span-2 w-full md:col-span-1">
+            <Button
+              variant="menu"
+              className="bg-yellow-300 flex items-center justify-center"
+              type="submit"
+            >
+              {count} resultaten
+            </Button>
+          </div>
+          <p className="hidden md:block"></p>
+          <div className="w-full text-center text-sm text-blue-700 cursor-pointer col-span-2 md:col-span-1">
             Uitgebreid zoeken
           </div>
         </form>
