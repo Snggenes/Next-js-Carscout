@@ -8,19 +8,9 @@ import Advice from "./components/main-page/advice";
 import NewOffers from "./components/main-page/new-offers";
 import Brief from "./components/main-page/brief";
 
-import { auth } from "@/auth";
 import NewOffersCars from "./components/main-page/new-offers-cars";
-import dbConnect from "@/lib/dbConnect";
-import UserInfoModel, { TUserInfo } from "@/lib/models/userinfo-model";
 
 export default async function Home({ params, searchParams }: any) {
-  // const session = await auth();
-  // const user = session?.user;
-
-  await dbConnect();
-  // const userInfo: TUserInfo | null = await UserInfoModel.findOne({ userId: user?.id });
-  // const safeUserInfo = JSON.parse(JSON.stringify(userInfo));
-
   const newOffersPageLimit = searchParams.newOffersLimit || 4;
   return (
     <div className="">
@@ -51,7 +41,7 @@ export default async function Home({ params, searchParams }: any) {
 
       <Container className="pt-4">
         <NewOffers>
-          <NewOffersCars limit={newOffersPageLimit}/>
+          <NewOffersCars limit={newOffersPageLimit} />
         </NewOffers>
       </Container>
 
@@ -61,7 +51,7 @@ export default async function Home({ params, searchParams }: any) {
 
       <Container className="pt-4">
         <NewOffers>
-          <NewOffersCars limit={newOffersPageLimit}/>
+          <NewOffersCars limit={newOffersPageLimit} />
         </NewOffers>
       </Container>
 
